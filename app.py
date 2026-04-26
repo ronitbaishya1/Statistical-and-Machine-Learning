@@ -70,7 +70,7 @@ def bandpower(freqs, psd, f1, f2):
     mask = (freqs >= f1) & (freqs < f2)
     if not np.any(mask):
         return np.nan
-    return float(np.trapz(psd[mask], freqs[mask]))
+    return float(np.trapezoid(psd[mask], freqs[mask]))
 
 def extract_features_for_window(window_df: pd.DataFrame, acc_cols, fs: float, bands, peak_band=(0.5,20.0)):
     feats = {}
