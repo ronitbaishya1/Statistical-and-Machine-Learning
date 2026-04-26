@@ -66,7 +66,7 @@ def welch_psd_numpy(x: np.ndarray, fs: float, nperseg: int = 2048, noverlap: int
     freqs = np.fft.rfftfreq(nperseg, d=1 / fs)
     return freqs, psd
 
-def bandpower(freqs: np.ndarray, psd: np.ndarray, f1: float, f2: float) -> float:
+def bandpower(freqs, psd, f1, f2):
     mask = (freqs >= f1) & (freqs < f2)
     if not np.any(mask):
         return np.nan
