@@ -6,9 +6,29 @@ This repository contains a course-project pipeline for **Structural Health Monit
 
 ---
 
+**Live Demo (Streamlit):** https://YOUR-APP-NAME.streamlit.app *(replace with your actual link)*
+
+This repository contains a course-project pipeline for **Structural Health Monitoring (SHM)** that reduces **environment-driven drift** (temperature/humidity/solar) in vibration-based features using **classical regression** (OLS, Ridge, Lasso) and a **lightweight nonlinear** extension (polynomial + regularization). The output is a residual-based **Environment-Normalized Damage/Novelty Index (ENDI)** and a clean anomaly/**alarm** timeline.
+
+---
+
 ## Abstract
 
 Vibration-based SHM indicators often vary with environmental conditions, which can mask or mimic damage. Using the openLAB Research Bridge dataset (accelerations with air temperature, humidity, and solar radiation), this project learns an environment-to-feature baseline and uses the resulting residuals as an environment-normalized health index. For each time window, we extract interpretable vibration features (e.g., dominant spectral peak proxies, bandpower ratios, RMS/crest factor) and model each feature \(y\) as a function of environmental variables \(x\) using Ordinary Least Square and regularized regression (Ridge and Lasso). To capture mild nonlinearity, we extend the design matrix with polynomial/interactions (or splines) and apply Ridge/Lasso to control complexity. Hyperparameters are selected via time-aware cross-validation, and performance is analyzed through bias–variance trade-offs. The main output is an Environment-Normalized Damage/Novelty Index defined from the residuals \(r=y-\hat{y}\), aggregated across sensors/features; reduced residual variance under normal periods and improved separation of abnormal periods will be quantified (e.g., lower false-alarm rate for a fixed threshold, stability across seasons). The final deliverable is a reproducible Python pipeline that fits the compensation models and generates before/after drift plots plus a residual-based health timeline for anomaly flagging.
+
+---
+
+**Pipeline**
+1. Segment triggered acceleration data into fixed windows (e.g., 5 s).
+2. Extract interpretable vibration features per sensor and window.
+3. Align each window with environment values (previous record or interpolation).
+4. Train regression models (OLS, Ridge, Lasso, Poly(deg=2)+Ridge) with **time-aware cross-validation**.
+5. Compute residuals \(r(t)=y(t)-\hat{y}(t)\).
+6. Aggregate standardized residual magnitudes into **ENDI(t)** (alarm score).
+
+**Interpretation**
+- **Low ENDI** → normal behavior after compensation (**no alarm**)
+- **High ENDI** → candidate abnormal period (**alarm candidate**; investigate further)
 
 ---
 
@@ -26,6 +46,36 @@ This project uses the **openLAB Research Bridge** monitoring dataset (TU Dresden
 - Reference period: **2024-02-01 to 2024-10-31** (undamaged baseline/reference condition)
 
 ---
+
+## Information About the Data Source
+
+**Dataset:** openLAB Research Bridge dataset (TU Dresden / IDA-KI openLAB; OpARA repository)
+
+**Official links (download & info)**
+- OpARA dataset record (download page): https://opara.zih.tu-dresden.de/items/6653124a-8659-40b8-817e-51250639c95b  
+- openLAB project overview: https://tu-dresden.de/bu/bauingenieurwesen/imb/forschung/grossprojekte/openLAB?set_language=en
+
+**Which folders to use (after download/unzip)**
+- `01_acceleration_trigger/`  → select/upload **multiple** `acc_*.csv` trigger files  
+- `02_environment/`           → select/upload **one or more** `environment_YYYY_MM.csv` files  
+
+**Default environment columns (editable in Streamlit sidebar)**
+- Temperature: `G_HTST_ENVR_EN0000_0`
+- Humidity: `G_HTSH_ENVR_EN0000_0`
+- Solar radiation: `G_PYRS_ENVR_EN0000_0`
+
+---
+
+## A List of Packages Required
+
+Create a `requirements.txt` in the repo root with:
+
+```txt
+streamlit
+numpy
+pandas
+matplotlib
+scikit-learn
 
 ## References (IEEE)
 
