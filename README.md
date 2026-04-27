@@ -66,18 +66,6 @@ This project uses the **openLAB Research Bridge** monitoring dataset (TU Dresden
 
 ---
 
-## A List of Packages Required
-
-Create a `requirements.txt` in the repo root with:
-
-```txt
-streamlit
-numpy
-pandas
-matplotlib
-scikit-learn
----
-
 ## References (IEEE)
 
 [1] A. Jansen, M. Herbers, B. Richter, M. Walker, F. Jesse, and S. Marx, “Monitoring data of the openLAB research bridge – Part 1: Reference condition,” *Data in Brief*, vol. 60, art. no. 111624, 2025, doi: 10.1016/j.dib.2025.111624. :contentReference[oaicite:3]{index=3}
@@ -92,4 +80,17 @@ scikit-learn
 
 This project was completed with limited assistance from generative AI tools (ChatGPT) as a supplementary resource, similar to a textbook or search engine. ChatGPT was used to help improve clarity of writing, organize the methodology and presentation narrative, and provide guidance on implementing standard machine-learning workflows (e.g., regression with regularization, time-aware cross-validation, and bootstrapping) in Python. All modeling choices, code, results, and interpretations were reviewed, verified, and are fully understood by the author, who assumes full responsibility for the final submitted work.
 
+---
+
+
+## A List of Packages Required
+
+Create a `requirements.txt` in the repo root with:
+
+```txt
+streamlit
+numpy
+pandas
+matplotlib
+scikit-learn
 ---
