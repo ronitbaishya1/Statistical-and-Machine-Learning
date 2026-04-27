@@ -6,7 +6,7 @@ This repository contains a course-project pipeline for **Structural Health Monit
 
 ---
 
-**Live Demo (Streamlit):** https://YOUR-APP-NAME.streamlit.app *(replace with your actual link)*
+**Live Demo (Streamlit):** https://statistical-and-machine-learning-yuj4fwdgxgkl8deyiv9ent.streamlit.app/
 
 This repository contains a course-project pipeline for **Structural Health Monitoring (SHM)** that reduces **environment-driven drift** (temperature/humidity/solar) in vibration-based features using **classical regression** (OLS, Ridge, Lasso) and a **lightweight nonlinear** extension (polynomial + regularization). The output is a residual-based **Environment-Normalized Damage/Novelty Index (ENDI)** and a clean anomaly/**alarm** timeline.
 
@@ -76,6 +76,7 @@ numpy
 pandas
 matplotlib
 scikit-learn
+---
 
 ## References (IEEE)
 
